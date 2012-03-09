@@ -35,9 +35,11 @@ int main()
     myButton2->SetPressedTexture( tManager.GetTexture( "Button3.png" ) );
     myButton2->SetPosition( 100, 50 );
     myButton2->SetSize( 300, 200 );
-    IMGuiManager::getSingleton().registerWidget( "Button", myButton2 );
+    IMGuiManager::getSingleton().registerWidget( "Button2", myButton2 );
 
-    while (app.IsOpened())
+
+
+    while (app.IsOpen())
     {
         weManager.handleEvents();
 

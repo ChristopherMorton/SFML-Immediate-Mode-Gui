@@ -46,8 +46,9 @@ int IMInstantButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
     {
         // Pressed
         Sprite *button = new Sprite( *pressed_look );
+        FloatRect frect = button->GetGlobalBounds();
         button->SetPosition( x_pos, y_pos );
-        button->Resize( x_size, y_size );
+        button->SetScale( x_size / frect.Width, y_size / frect.Height );
         IMGuiManager::getSingleton().PushSprite( button );
     }
     else
@@ -56,16 +57,18 @@ int IMInstantButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
         {
             // Hover
             Sprite *button = new Sprite( *hover_look );
+            FloatRect frect = button->GetGlobalBounds();
             button->SetPosition( x_pos, y_pos );
-            button->Resize( x_size, y_size );
+            button->SetScale( x_size / frect.Width, y_size / frect.Height );
             IMGuiManager::getSingleton().PushSprite( button );
         }
         else
         {
             // Normal
             Sprite *button = new Sprite( *normal_look );
+            FloatRect frect = button->GetGlobalBounds();
             button->SetPosition( x_pos, y_pos );
-            button->Resize( x_size, y_size );
+            button->SetScale( x_size / frect.Width, y_size / frect.Height );
             IMGuiManager::getSingleton().PushSprite( button );
         }
     }
