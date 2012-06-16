@@ -54,11 +54,11 @@ SFML_WindowEventManager::~SFML_WindowEventManager( void ) {
 }
  
 void SFML_WindowEventManager::initialise( sf::RenderWindow* renderWindow ) {
-    GlobalRenderWindow::SetWindow(renderWindow);
+    GlobalRenderWindow::setWindow(renderWindow);
 }
 
 sf::RenderWindow* SFML_WindowEventManager::getRenderWindow() {
-    return GlobalRenderWindow::GetWindow();
+    return GlobalRenderWindow::getWindow();
 }
  
 bool SFML_WindowEventManager::handleEvents( void ) {
@@ -66,31 +66,31 @@ bool SFML_WindowEventManager::handleEvents( void ) {
         return false;
 
     sf::Event event;
-    while ( m_RenderWindow->PollEvent(event) )
+    while ( m_RenderWindow->pollEvent(event) )
     {
-        switch (event.Type) {
+        switch (event.type) {
             case sf::Event::KeyPressed:
-                keyPressed( event.Key );
+                keyPressed( event.key );
                 break;
 
             case sf::Event::KeyReleased:
-                keyReleased( event.Key );
+                keyReleased( event.key );
                 break;
 
             case sf::Event::MouseMoved:
-                mouseMoved( event.MouseMove );
+                mouseMoved( event.mouseMove );
                 break;
 
             case sf::Event::MouseButtonPressed:
-                mouseButtonPressed( event.MouseButton );
+                mouseButtonPressed( event.mouseButton );
                 break;
 
             case sf::Event::MouseButtonReleased:
-                mouseButtonReleased( event.MouseButton );
+                mouseButtonReleased( event.mouseButton );
                 break;
 
             case sf::Event::MouseWheelMoved:
-                mouseWheelMoved( event.MouseWheel );
+                mouseWheelMoved( event.mouseWheel );
                 break;
 
             //case sf::Event::JoystickMoved: etc.
@@ -99,7 +99,7 @@ bool SFML_WindowEventManager::handleEvents( void ) {
                 break;
 
             case sf::Event::Resized:
-                windowResized( event.Size );
+                windowResized( event.size );
                 break;
 
             case sf::Event::LostFocus:
@@ -428,7 +428,7 @@ bool SFML_WindowEventManager::joystickButtonReleased( const sf::Event::JoystickB
 bool SFML_WindowEventManager::joystickConnected( const sf::Event::JoystickConnectEvent &e ) {
     // This one is different, we don't pass it on, we use it to register a new joystick
 
-    const unsigned int joystickID = e.JoystickId;
+    const unsigned int joystickID = e.joystickId;
     mJoystickIDs.insert( joystickID );
  
     return true;
@@ -436,7 +436,7 @@ bool SFML_WindowEventManager::joystickConnected( const sf::Event::JoystickConnec
 
 bool SFML_WindowEventManager::joystickDisconnected( const sf::Event::JoystickConnectEvent &e ) {
     // This one is different, we don't pass it on, we use it to unregister a new joystick
-    const unsigned int joystickID = e.JoystickId;
+    const unsigned int joystickID = e.joystickId;
     mJoystickIDs.erase( joystickID );
  
     return true;

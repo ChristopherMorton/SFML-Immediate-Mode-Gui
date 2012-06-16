@@ -13,7 +13,7 @@ CEGUI_INC= -I/usr/local/include/CEGUI
 
 LIB_DIRS= -L/usr/local/lib/
 SFML_LIB= -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
-OTHER_LIB= -lXxf86vm -lX11 -lz -ltinyxml
+OTHER_LIB= -lXxf86vm -lX11 -lz
 
 CXX=g++
 COMPILER_FLAGS= -O0 -g -Wall

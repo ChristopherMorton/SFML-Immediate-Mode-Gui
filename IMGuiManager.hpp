@@ -80,11 +80,11 @@ public:
     virtual bool mouseWheelMoved( const Event::MouseWheelEvent &mouse_wheel_move );
     */
 
-    void Begin();
-    void PushSprite( sf::Sprite* sprite );
-    void End();
-    int RunWidget( string name );
-    int RunWidget( unsigned int id_num );
+    void begin();
+    void pushSprite( sf::Sprite* sprite );
+    void end();
+    int runWidget( string name );
+    int runWidget( unsigned int id_num );
 
     const unsigned int registerWidget( string name, IMGuiWidget* widgetItem );
 

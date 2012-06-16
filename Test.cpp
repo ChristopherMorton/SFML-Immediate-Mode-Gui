@@ -19,43 +19,43 @@ int main()
 
     weManager.initialise( &app );
 
-    cManager.CreateCursor( IMCursorManager::DEFAULT, tManager.GetTexture( "UglyBlueMouse.png" ));//, 30, 30 );
+    cManager.createCursor( IMCursorManager::DEFAULT, tManager.getTexture( "UglyBlueMouse.png" ));//, 30, 30 );
 
     IMButton* myButton = new IMInstantButton();
-    myButton->SetNormalTexture( tManager.GetTexture( "Button.png" ) );
-    myButton->SetHoverTexture( tManager.GetTexture( "Button2.png" ) );
-    myButton->SetPressedTexture( tManager.GetTexture( "Button3.png" ) );
-    myButton->SetPosition( 10, 10 );
-    myButton->SetSize( 200, 200 );
+    myButton->setNormalTexture( tManager.getTexture( "Button.png" ) );
+    myButton->setHoverTexture( tManager.getTexture( "Button2.png" ) );
+    myButton->setPressedTexture( tManager.getTexture( "Button3.png" ) );
+    myButton->setPosition( 10, 10 );
+    myButton->setSize( 200, 200 );
     IMGuiManager::getSingleton().registerWidget( "Button", myButton );
 
     IMButton* myButton2 = new IMButton();
-    myButton2->SetNormalTexture( tManager.GetTexture( "Button.png" ) );
-    myButton2->SetHoverTexture( tManager.GetTexture( "Button2.png" ) );
-    myButton2->SetPressedTexture( tManager.GetTexture( "Button3.png" ) );
-    myButton2->SetPosition( 100, 50 );
-    myButton2->SetSize( 300, 200 );
+    myButton2->setNormalTexture( tManager.getTexture( "Button.png" ) );
+    myButton2->setHoverTexture( tManager.getTexture( "Button2.png" ) );
+    myButton2->setPressedTexture( tManager.getTexture( "Button3.png" ) );
+    myButton2->setPosition( 100, 50 );
+    myButton2->setSize( 300, 200 );
     IMGuiManager::getSingleton().registerWidget( "Button2", myButton2 );
 
 
 
-    while (app.IsOpen())
+    while (app.isOpen())
     {
         weManager.handleEvents();
 
-        app.Clear( sf::Color::White );
+        app.clear( sf::Color::White );
 
-        gManager.Begin();
+        gManager.begin();
 
-        if (myButton2->Do())
-            myButton2->SetPosition( 300, 300 );
+        if (myButton2->doWidget())
+            myButton2->setPosition( 300, 300 );
 
-        if (myButton->Do())
-            app.Close(); 
+        if (myButton->doWidget())
+            app.close(); 
 
-        gManager.End();
+        gManager.end();
 
-        cManager.DrawCursor();
-        app.Display();
+        cManager.drawCursor();
+        app.display();
     }
 }

@@ -7,13 +7,13 @@ namespace sf { class RenderWindow; };
 
 struct GlobalRenderWindow
 {
-    static sf::RenderWindow*& GetWindow() {
+    static sf::RenderWindow*& getWindow() {
         static sf::RenderWindow* pointer;
         return pointer;
     }
 
-    static void SetWindow( sf::RenderWindow* window) {
-        GetWindow() = window;
+    static void setWindow( sf::RenderWindow* window) {
+        getWindow() = window;
     }
 };
 

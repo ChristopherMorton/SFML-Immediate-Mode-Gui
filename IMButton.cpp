@@ -17,8 +17,8 @@ IMButton::IMButton() : normal_look(NULL), hover_look(NULL), pressed_look(NULL)
 IMButton::IMButton( int x_pos, int y_pos, int x_size, int y_size )
     : normal_look(NULL), hover_look(NULL), pressed_look(NULL)
 { 
-    SetPosition( x_pos, y_pos );
-    SetSize( x_size, y_size );
+    setPosition( x_pos, y_pos );
+    setSize( x_size, y_size );
 }
 
 IMButton::IMButton( const IMButton& other )
@@ -26,8 +26,8 @@ IMButton::IMButton( const IMButton& other )
       hover_look( other.hover_look ),
       pressed_look( other.pressed_look )
 { 
-    SetPosition( other._x_position, other._y_position );
-    SetSize( other._x_dimension, other._y_dimension );
+    setPosition( other._x_position, other._y_position );
+    setSize( other._x_dimension, other._y_dimension );
 }
 
 IMButton& IMButton::operator=( const IMButton& other )
@@ -35,8 +35,8 @@ IMButton& IMButton::operator=( const IMButton& other )
     normal_look = other.normal_look;
     hover_look = other.hover_look;
     pressed_look = other.pressed_look;
-    SetPosition( other._x_position, other._y_position );
-    SetSize( other._x_dimension, other._y_dimension );
+    setPosition( other._x_position, other._y_position );
+    setSize( other._x_dimension, other._y_dimension );
     return *this;
 }
 
@@ -45,56 +45,52 @@ IMButton::~IMButton()
 
 ///////////////////////////////////////////////////////////////////////////
 // Overrides from IMGuiWidget:
-int IMButton::Do() 
+int IMButton::doWidget() 
 { 
-    return DoButton( _x_position, _y_position, _x_dimension, _y_dimension );
+    return doButton( _x_position, _y_position, _x_dimension, _y_dimension );
 }
 
 
-// Moves the widget before Do-ing, the values are absolute
-int IMButton::DoMove( int x_pos, int y_pos, bool keep_new_position ) 
+// Moves the widget before doWidget-ing, the values are absolute
+int IMButton::doMove( int x_pos, int y_pos, bool keep_new_position ) 
 {
     if (keep_new_position) {
         _x_position = x_pos;
         _y_position = y_pos;
-        return Do();
-    } else {
-        return DoButton( x_pos, y_pos, _x_dimension, _y_dimension );
     }
+    return doButton( x_pos, y_pos, _x_dimension, _y_dimension );
 }
 
-// Moves the widget before Do-ing, the values are relative
-int IMButton::DoShift( int x_shift, int y_shift, bool keep_new_position ) 
+// Moves the widget before doWidget-ing, the values are relative
+int IMButton::doShift( int x_shift, int y_shift, bool keep_new_position ) 
 {
     if (keep_new_position) {
         _x_position += x_shift;
         _y_position += y_shift;
-        return Do();
+        return doWidget();
     } else {
-        return DoButton( _x_position + x_shift, _y_position + y_shift, _x_dimension, _y_dimension );
+        return doButton( _x_position + x_shift, _y_position + y_shift, _x_dimension, _y_dimension );
     }
 }
 
 // Resizes before Doing
-int IMButton::DoResize( int x_size, int y_size, bool keep_new_size ) 
+int IMButton::doResize( int x_size, int y_size, bool keep_new_size ) 
 {
     if (keep_new_size) {
         _x_dimension = x_size;
         _y_dimension = y_size;
-        return Do();
-    } else {
-        return DoButton( _x_position, _y_position, x_size, y_size );
     }
+    return doButton( _x_position, _y_position, x_size, y_size );
 }
 
-int IMButton::SetPosition( int x_pos, int y_pos )
+int IMButton::setPosition( int x_pos, int y_pos )
 {
     _x_position = x_pos;
     _y_position = y_pos;
     return 0;
 }
 
-int IMButton::SetSize( int x_dim, int y_dim )
+int IMButton::setSize( int x_dim, int y_dim )
 {
     _x_dimension = x_dim;
     _y_dimension = y_dim;
@@ -103,11 +99,11 @@ int IMButton::SetSize( int x_dim, int y_dim )
 
 ///////////////////////////////////////////////////////////////////////////
 
-int IMButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
+int IMButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
 {
     IMGuiManager::UIState& uistate = IMGuiManager::getSingleton().state;
     sf::Vector2i& mouse_pos = uistate.mouse_pos;
-    //cout << "DO: mousex=" << mouse_pos.x << " mousey=" << mouse_pos.y << endl;
+    //cout << "doWidget: mousex=" << mouse_pos.x << " mousey=" << mouse_pos.y << endl;
     if (uistate.hot_widget == NULL &&
          !(mouse_pos.x < x_pos ||
           mouse_pos.y < y_pos ||
@@ -124,10 +120,10 @@ int IMButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
     {
         // Pressed
         Sprite *button = new Sprite( *pressed_look );
-        FloatRect frect = button->GetGlobalBounds();
-        button->SetPosition( x_pos, y_pos );
-        button->SetScale( x_size / frect.Width, y_size / frect.Height );
-        IMGuiManager::getSingleton().PushSprite( button );
+        FloatRect frect = button->getGlobalBounds();
+        button->setPosition( x_pos, y_pos );
+        button->setScale( x_size / frect.width, y_size / frect.height );
+        IMGuiManager::getSingleton().pushSprite( button );
     }
     else
     {
@@ -135,19 +131,19 @@ int IMButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
         {
             // Hover
             Sprite *button = new Sprite( *hover_look );
-            FloatRect frect = button->GetGlobalBounds();
-            button->SetPosition( x_pos, y_pos );
-            button->SetScale( x_size / frect.Width, y_size / frect.Height );
-            IMGuiManager::getSingleton().PushSprite( button );
+            FloatRect frect = button->getGlobalBounds();
+            button->setPosition( x_pos, y_pos );
+            button->setScale( x_size / frect.width, y_size / frect.height );
+            IMGuiManager::getSingleton().pushSprite( button );
         }
         else
         {
             // Normal
             Sprite *button = new Sprite( *normal_look );
-            FloatRect frect = button->GetGlobalBounds();
-            button->SetPosition( x_pos, y_pos );
-            button->SetScale( x_size / frect.Width, y_size / frect.Height );
-            IMGuiManager::getSingleton().PushSprite( button );
+            FloatRect frect = button->getGlobalBounds();
+            button->setPosition( x_pos, y_pos );
+            button->setScale( x_size / frect.width, y_size / frect.height );
+            IMGuiManager::getSingleton().pushSprite( button );
         }
     }
 
@@ -157,17 +153,17 @@ int IMButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
         return 0;
 }
 
-void IMButton::SetNormalTexture( Texture* texture ) 
+void IMButton::setNormalTexture( Texture* texture ) 
 {
     normal_look = texture;
 }
 
-void IMButton::SetHoverTexture( Texture* texture ) 
+void IMButton::setHoverTexture( Texture* texture ) 
 {
     hover_look = texture;
 }
 
-void IMButton::SetPressedTexture( Texture* texture ) 
+void IMButton::setPressedTexture( Texture* texture ) 
 {
     pressed_look = texture;
 }

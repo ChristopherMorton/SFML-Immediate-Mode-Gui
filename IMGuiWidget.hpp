@@ -23,19 +23,19 @@ protected:
 public:
     virtual ~IMGuiWidget() {}
 
-    virtual int Do() = 0;
+    virtual int doWidget() = 0;
 
     // Moves the widget before Do-ing, the values are absolute
-    virtual int DoMove( int x_pos, int y_pos, bool keep_new_position ) = 0;
+    virtual int doMove( int x_pos, int y_pos, bool keep_new_position ) = 0;
     // Moves the widget before Do-ing, the values are relative
-    virtual int DoShift( int x_shift, int y_shift, bool keep_new_position ) = 0;
+    virtual int doShift( int x_shift, int y_shift, bool keep_new_position ) = 0;
     // Resizes before Doing
-    virtual int DoResize( int x_size, int y_size, bool keep_new_size ) = 0;
+    virtual int doResize( int x_size, int y_size, bool keep_new_size ) = 0;
 
     //virtual int SetPosition( int x_pos, int y_pos ) { _x_position = x_pos; _y_position = y_pos; return 0; }
     //virtual int SetSize( int x_dim, int y_dim ) { _x_dimension = x_dim; _y_dimension = y_dim; return 0; }
-    virtual int SetPosition( int x_pos, int y_pos ) = 0;
-    virtual int SetSize( int x_dim, int y_dim ) = 0;
+    virtual int setPosition( int x_pos, int y_pos ) = 0;
+    virtual int setSize( int x_dim, int y_dim ) = 0;
 
 };
 #endif

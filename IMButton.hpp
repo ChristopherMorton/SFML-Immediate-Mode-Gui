@@ -26,27 +26,27 @@ public:
 
     ///////////////////////////////////////////////////////////////////////////
     // Overrides from IMGuiWidget:
-    virtual int Do();
+    virtual int doWidget();
 
     // Moves the widget before Do-ing, the values are absolute
-    virtual int DoMove( int x_pos, int y_pos, bool keep_new_position );
+    virtual int doMove( int x_pos, int y_pos, bool keep_new_position );
     // Moves the widget before Do-ing, the values are relative
-    virtual int DoShift( int x_shift, int y_shift, bool keep_new_position );
+    virtual int doShift( int x_shift, int y_shift, bool keep_new_position );
     // Resizes before Doing
-    virtual int DoResize( int x_size, int y_size, bool keep_new_size );
+    virtual int doResize( int x_size, int y_size, bool keep_new_size );
 
-    virtual int SetPosition( int x_pos, int y_pos );
-    virtual int SetSize( int x_dim, int y_dim );
+    virtual int setPosition( int x_pos, int y_pos );
+    virtual int setSize( int x_dim, int y_dim );
     ///////////////////////////////////////////////////////////////////////////
-    virtual int DoButton( int x_pos, int y_pos, int x_size, int y_size );
+    virtual int doButton( int x_pos, int y_pos, int x_size, int y_size );
 
-    void SetNormalTexture( Texture *texture );
-    void SetHoverTexture( Texture *texture );
-    void SetPressedTexture( Texture *texture );
+    void setNormalTexture( Texture *texture );
+    void setHoverTexture( Texture *texture );
+    void setPressedTexture( Texture *texture );
 
     /* Put this in IMTextButton
-    int SetFont( Font& font );
-    int SetText( std::string& text );
+    int setFont( Font& font );
+    int setText( std::string& text );
     */
 };
 

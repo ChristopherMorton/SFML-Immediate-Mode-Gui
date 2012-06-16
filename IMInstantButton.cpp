@@ -25,7 +25,7 @@ IMInstantButton& IMInstantButton::operator=( const IMButton& rhs )
 IMInstantButton::~IMInstantButton()
 { }
 
-int IMInstantButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
+int IMInstantButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
 {
     IMGuiManager::UIState& uistate = IMGuiManager::getSingleton().state;
     sf::Vector2i& mouse_pos = uistate.mouse_pos;
@@ -46,10 +46,10 @@ int IMInstantButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
     {
         // Pressed
         Sprite *button = new Sprite( *pressed_look );
-        FloatRect frect = button->GetGlobalBounds();
-        button->SetPosition( x_pos, y_pos );
-        button->SetScale( x_size / frect.Width, y_size / frect.Height );
-        IMGuiManager::getSingleton().PushSprite( button );
+        FloatRect frect = button->getGlobalBounds();
+        button->setPosition( x_pos, y_pos );
+        button->setScale( x_size / frect.width, y_size / frect.height );
+        IMGuiManager::getSingleton().pushSprite( button );
     }
     else
     {
@@ -57,19 +57,19 @@ int IMInstantButton::DoButton( int x_pos, int y_pos, int x_size, int y_size )
         {
             // Hover
             Sprite *button = new Sprite( *hover_look );
-            FloatRect frect = button->GetGlobalBounds();
-            button->SetPosition( x_pos, y_pos );
-            button->SetScale( x_size / frect.Width, y_size / frect.Height );
-            IMGuiManager::getSingleton().PushSprite( button );
+            FloatRect frect = button->getGlobalBounds();
+            button->setPosition( x_pos, y_pos );
+            button->setScale( x_size / frect.width, y_size / frect.height );
+            IMGuiManager::getSingleton().pushSprite( button );
         }
         else
         {
             // Normal
             Sprite *button = new Sprite( *normal_look );
-            FloatRect frect = button->GetGlobalBounds();
-            button->SetPosition( x_pos, y_pos );
-            button->SetScale( x_size / frect.Width, y_size / frect.Height );
-            IMGuiManager::getSingleton().PushSprite( button );
+            FloatRect frect = button->getGlobalBounds();
+            button->setPosition( x_pos, y_pos );
+            button->setScale( x_size / frect.width, y_size / frect.height );
+            IMGuiManager::getSingleton().pushSprite( button );
         }
     }
 

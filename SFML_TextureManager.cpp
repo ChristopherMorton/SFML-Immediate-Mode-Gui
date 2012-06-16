@@ -9,7 +9,7 @@ SFML_TextureManager::SFML_TextureManager()
 
 SFML_TextureManager::~SFML_TextureManager()
 {
-    ClearAllTextures();
+    clearAllTextures();
 }
 
 SFML_TextureManager& SFML_TextureManager::getSingleton()
@@ -18,18 +18,18 @@ SFML_TextureManager& SFML_TextureManager::getSingleton()
     return singleton;
 }
 
-void SFML_TextureManager::AddSearchDirectory( string dir )
+void SFML_TextureManager::addSearchDirectory( string dir )
 { 
     path_list.push_back( dir );
 }
     
-void SFML_TextureManager::ClearSearchDirectories()
+void SFML_TextureManager::clearSearchDirectories()
 {
     path_list.clear();
     path_list.push_back("./");
 }
 
-bool SFML_TextureManager::AddTexture( string path )
+bool SFML_TextureManager::addTexture( string path )
 {
     Texture* texture = new Texture();
     bool success = false;
@@ -41,7 +41,7 @@ bool SFML_TextureManager::AddTexture( string path )
         string full_path( *it );
         full_path.append( path );
 
-        if ( texture->LoadFromFile( full_path ) )
+        if ( texture->loadFromFile( full_path ) )
         {
             // Success!
             success = true;
@@ -70,7 +70,7 @@ bool SFML_TextureManager::AddTexture( string path )
     }
 }
 
-bool SFML_TextureManager::AddTexture( string internal_path, Texture* texture )
+bool SFML_TextureManager::addTexture( string internal_path, Texture* texture )
 {
     if (texture == NULL) {
         return false;
@@ -90,7 +90,7 @@ bool SFML_TextureManager::AddTexture( string internal_path, Texture* texture )
     }
 }
 
-Texture* SFML_TextureManager::GetTexture( string path )
+Texture* SFML_TextureManager::getTexture( string path )
 {
     map<string, Texture*>::iterator it = texture_map.find( path );
     if ( it != texture_map.end() ) {
@@ -100,7 +100,7 @@ Texture* SFML_TextureManager::GetTexture( string path )
     else
     {
         // Attempt to create it
-        if ( AddTexture( path ) )
+        if ( addTexture( path ) )
         {
             return texture_map[path];
         }
@@ -111,7 +111,7 @@ Texture* SFML_TextureManager::GetTexture( string path )
     }
 }
 
-bool SFML_TextureManager::ClearTexture( string path )
+bool SFML_TextureManager::clearTexture( string path )
 {
     map<string, Texture*>::iterator it = texture_map.find( path );
     if ( it != texture_map.end() ) {
@@ -124,7 +124,7 @@ bool SFML_TextureManager::ClearTexture( string path )
     return false;
 }
 
-void SFML_TextureManager::ClearAllTextures()
+void SFML_TextureManager::clearAllTextures()
 {
     map<string, Texture*>::iterator it = texture_map.begin();
     while ( it != texture_map.end() ) {

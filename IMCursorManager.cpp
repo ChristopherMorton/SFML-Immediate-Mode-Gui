@@ -10,7 +10,7 @@ IMCursorManager::IMCursorManager()
 
 IMCursorManager::~IMCursorManager()
 {
-    ClearAllCursors();
+    clearAllCursors();
 }
 
 IMCursorManager& IMCursorManager::getSingleton()
@@ -20,7 +20,7 @@ IMCursorManager& IMCursorManager::getSingleton()
 }
 
 // Returns false if the given type has no associated image, otherwise sets the new cursor
-bool IMCursorManager::SetCursor( const CursorType type )
+bool IMCursorManager::setCursor( const CursorType type )
 {
     if ( NULL == m_cursor_images[type] && type > DEFAULT )
         return false;
@@ -28,12 +28,12 @@ bool IMCursorManager::SetCursor( const CursorType type )
         return m_cursor_images[type];
 }
 
-IMCursorManager::CursorType IMCursorManager::GetCurrentCursor()
+IMCursorManager::CursorType IMCursorManager::getCurrentCursor()
 {
     return current_type;
 }
 
-bool IMCursorManager::ClearCursor( const CursorType type )
+bool IMCursorManager::clearCursor( const CursorType type )
 {
     if ( NULL == m_cursor_images[type] || type <= SYSTEM )
         return false;
@@ -43,7 +43,7 @@ bool IMCursorManager::ClearCursor( const CursorType type )
     return true;
 }
 
-bool IMCursorManager::ClearAllCursors()
+bool IMCursorManager::clearAllCursors()
 {
     vector<sf::Sprite*>::iterator it = m_cursor_images.begin();
 
@@ -57,27 +57,27 @@ bool IMCursorManager::ClearAllCursors()
     return true;
 }
 
-void IMCursorManager::DrawCursor()
+void IMCursorManager::drawCursor()
 {
     if (SYSTEM == current_type || (DEFAULT == current_type && NULL == m_cursor_images[DEFAULT]))
     {
         // Use system cursor
-        GlobalRenderWindow::GetWindow()->ShowMouseCursor(true);
+        GlobalRenderWindow::getWindow()->setMouseCursorVisible(true);
     }
     else if ( ! (NONE == current_type || NULL == m_cursor_images[current_type]) )
     {
-        sf::RenderWindow* renderer = GlobalRenderWindow::GetWindow();
-        renderer->ShowMouseCursor(false);
+        sf::RenderWindow* renderer = GlobalRenderWindow::getWindow();
+        renderer->setMouseCursorVisible(false);
         // Draw!
         sf::Sprite* toDraw( m_cursor_images[current_type] );
-        sf::Vector2i mouse_position = sf::Mouse::GetPosition( *(renderer) );
-        toDraw->SetOrigin( -mouse_position.x, -mouse_position.y );
-        renderer->Draw( *toDraw ); 
+        sf::Vector2i mouse_position = sf::Mouse::getPosition( *(renderer) );
+        toDraw->setOrigin( -mouse_position.x, -mouse_position.y );
+        renderer->draw( *toDraw ); 
     }
 }
 
 // These require a specified offset and size value
-bool IMCursorManager::CreateCursor( const CursorType type, const sf::Texture* texture, const int offset_x, const int offset_y, const int size_x, const int size_y )
+bool IMCursorManager::createCursor( const CursorType type, const sf::Texture* texture, const int offset_x, const int offset_y, const int size_x, const int size_y )
 { 
     if (NULL == texture)
         return false;
@@ -86,26 +86,26 @@ bool IMCursorManager::CreateCursor( const CursorType type, const sf::Texture* te
         return false;
 
     sf::Sprite* cursorSprite = new sf::Sprite();
-    cursorSprite->SetPosition( offset_x, offset_y );
-    cursorSprite->SetScale( size_x, size_y );
-    cursorSprite->SetTexture( *texture );
+    cursorSprite->setPosition( offset_x, offset_y );
+    cursorSprite->setScale( size_x, size_y );
+    cursorSprite->setTexture( *texture );
 
-    LoadSprite( type, cursorSprite );
+    loadSprite( type, cursorSprite );
     return true;
 }
 
-bool IMCursorManager::CreateCursor( const CursorType type, const sf::Texture* texture, const sf::Vector2i offset, const sf::Vector2i size )
+bool IMCursorManager::createCursor( const CursorType type, const sf::Texture* texture, const sf::Vector2i offset, const sf::Vector2i size )
 {
-    return CreateCursor( type, texture, offset.x, offset.y, size.x, size.y );
+    return createCursor( type, texture, offset.x, offset.y, size.x, size.y );
 }
 
-bool IMCursorManager::CreateCursor( const CursorType type, const sf::Texture* texture, const sf::Rect<int> offsetAndSize )
+bool IMCursorManager::createCursor( const CursorType type, const sf::Texture* texture, const sf::Rect<int> offsetAndSize )
 {
-    return CreateCursor( type, texture, offsetAndSize.Left, offsetAndSize.Top, offsetAndSize.Width, offsetAndSize.Height );
+    return createCursor( type, texture, offsetAndSize.left, offsetAndSize.top, offsetAndSize.width, offsetAndSize.height );
 }
 
 // These only require a specified offset and take the size from the Texture
-bool IMCursorManager::CreateCursor( const CursorType type, const sf::Texture* texture, const int offset_x, const int offset_y )
+bool IMCursorManager::createCursor( const CursorType type, const sf::Texture* texture, const int offset_x, const int offset_y )
 {
     if (NULL == texture)
         return false;
@@ -114,24 +114,24 @@ bool IMCursorManager::CreateCursor( const CursorType type, const sf::Texture* te
         return false;
 
     sf::Sprite* cursorSprite = new sf::Sprite( );
-    cursorSprite->SetPosition( offset_x, offset_y );
-    cursorSprite->SetTexture( *texture, true ); // Auto-scales
+    cursorSprite->setPosition( offset_x, offset_y );
+    cursorSprite->setTexture( *texture, true ); // Auto-scales
 
-    LoadSprite( type, cursorSprite );
+    loadSprite( type, cursorSprite );
     return true;
 }
 
-bool IMCursorManager::CreateCursor( const CursorType type, const sf::Texture* texture, const sf::Vector2i offset )
+bool IMCursorManager::createCursor( const CursorType type, const sf::Texture* texture, const sf::Vector2i offset )
 {
-    return CreateCursor( type, texture, offset.x, offset.y );
+    return createCursor( type, texture, offset.x, offset.y );
 }
 
-bool IMCursorManager::CreateCursor( const CursorType type, const sf::Texture* texture )
+bool IMCursorManager::createCursor( const CursorType type, const sf::Texture* texture )
 { 
-    return CreateCursor( type, texture, 0, 0 );
+    return createCursor( type, texture, 0, 0 );
 }
 
-void IMCursorManager::LoadSprite( CursorType type, sf::Sprite* sprite )
+void IMCursorManager::loadSprite( CursorType type, sf::Sprite* sprite )
 {
     sf::Sprite*& old_sprite = m_cursor_images[type];
 

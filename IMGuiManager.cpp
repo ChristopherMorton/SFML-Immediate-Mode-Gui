@@ -68,23 +68,23 @@ bool IMGuiManager::mouseWheelMoved( const Event::MouseWheelEvent &mouse_wheel_mo
 }
 *//////////////////////////////////////////////////////////////////////////
 
-void IMGuiManager::Begin()
+void IMGuiManager::begin()
 {
     state.hot_widget = NULL;
     // Get mouse state from sf::Mouse
-    state.mouse_down = sf::Mouse::IsButtonPressed( sf::Mouse::Left );
-    state.mouse_pos = sf::Mouse::GetPosition( (*(SFML_WindowEventManager::getSingleton().getRenderWindow())) );
+    state.mouse_down = sf::Mouse::isButtonPressed( sf::Mouse::Left );
+    state.mouse_pos = sf::Mouse::getPosition( (*(SFML_WindowEventManager::getSingleton().getRenderWindow())) );
 
-    IMCursorManager::getSingleton().SetCursor( IMCursorManager::DEFAULT );
+    IMCursorManager::getSingleton().setCursor( IMCursorManager::DEFAULT );
 }
 
-void IMGuiManager::PushSprite( Sprite* sprite )
+void IMGuiManager::pushSprite( Sprite* sprite )
 {
     if (sprite)
         render_stack.push( sprite );
 }
 
-void IMGuiManager::End()
+void IMGuiManager::end()
 {
     RenderWindow* renderer = SFML_WindowEventManager::getSingleton().getRenderWindow();
     // Draw the stuff!
@@ -92,7 +92,7 @@ void IMGuiManager::End()
         Sprite* sprite = render_stack.top();
         render_stack.pop();
         if (sprite) {
-            renderer->Draw( *sprite );
+            renderer->draw( *sprite );
             delete sprite;
         }
     }
@@ -103,12 +103,12 @@ void IMGuiManager::End()
     }
 }
 
-int IMGuiManager::RunWidget( string name )
+int IMGuiManager::runWidget( string name )
 {
-    return RunWidget( getID( name ) );
+    return runWidget( getID( name ) );
 }
 
-int IMGuiManager::RunWidget( unsigned int id )
+int IMGuiManager::runWidget( unsigned int id )
 {
     if ( !id || id >= widget_vector.size() )
         return 0; // invalid id number
@@ -117,7 +117,7 @@ int IMGuiManager::RunWidget( unsigned int id )
     if (!widget)
         return 0; // no associated widget
 
-    return widget->Do();
+    return widget->doWidget();
 }
 
 const unsigned int IMGuiManager::registerWidget( string name, IMGuiWidget* widgetItem )

@@ -52,17 +52,17 @@ class SFML_TextureManager
 public:
     static SFML_TextureManager& getSingleton();
 
-    void AddSearchDirectory( string dir );
-    void ClearSearchDirectories();
+    void addSearchDirectory( string dir );
+    void clearSearchDirectories();
 
     // Returns false if file can't be found
-    bool AddTexture( string path );
+    bool addTexture( string path );
     // Returns false if passed Texture* is null
-    bool AddTexture( string internal_path, Texture* texture );
+    bool addTexture( string internal_path, Texture* texture );
 
-    Texture* GetTexture( string path );
+    Texture* getTexture( string path );
 
-    bool ClearTexture( string path );
-    void ClearAllTextures();
+    bool clearTexture( string path );
+    void clearAllTextures();
 };
 #endif
