@@ -15,23 +15,23 @@
  * to allow for efficient and flexible rendering.
  *
  * This also makes the interface very simple.
- * Just call RunWidget( "WidgetName" ) and the correct widget will
+ * Just call runWidget( "WidgetName" ) and the correct widget will
  * be drawn, interacted with, and will return the correct result.
  * Of course, each type of widget will have its own specific
  * ways to set itself up, which the user needs to do on their own.
  *
  * Also, if you like, you can access the internal widget ID of a given widget,
- * and call RunWidget( id_num ).  There might be a small speedup
+ * and call runWidget( id_num ).  There might be a small speedup
  * from doing this if the number of widgets is large.
  *
  * NOTE: You don't -have- to register widgets here at all.
  * The primary function of this class is to maintain the UI state.
  * If desired, you can instantiate and keep track of IMGuiWidgets
- * and manually call their Do() functions yourself.
+ * and manually call their doWidget() functions yourself.
  * In fact, this is recommended, as you don't need to cast from
  * IMGuiWidget* to, say, IMGuiButton* in order to do button-specific things.
  *
- * BUT: You still need to call Begin() and End() regardless.
+ * BUT: You still need to call begin() and end() regardless.
  *
  *
  * IMPORTANT:

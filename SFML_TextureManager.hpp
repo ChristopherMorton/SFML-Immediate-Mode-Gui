@@ -6,25 +6,25 @@
  * then make them accessible at run time, while avoiding duplication of resources.
  *
  * To use:
- * First, use AddSearchDirectory( string dir ) for any directories other than ./
+ * First, use addSearchDirectory( string dir ) for any directories other than ./
  * from which resources will need to be loaded.  This can be skipped if you're
  * dead sure where each resource will be, in which case you should fully qualify
  * each path name, but doing it this way adds very little overhead and makes
  * your code much more flexible.
  * Add these in the order you expect them to be searched.
  *
- * Second, call AddTexture( string path ), or GetTexture( ... ) which will call
- * AddTexture if the texture isn't there.  Do this for any textures you will need
+ * Second, call addTexture( string path ), or getTexture( ... ) which will call
+ * addTexture if the texture isn't there.  Do this for any textures you will need
  * during run time, BEFORE run time comes around, to avoid slowdown.
  *
- * Alternatively, call AddTexture( string internal_path, Texture* texture ) to add
+ * Alternatively, call addTexture( string internal_path, Texture* texture ) to add
  * textures that were generated programatically.
  *
- * Third, when a Texture is needed, call GetTexture( string path ) to retrieve it.
+ * Third, when a Texture is needed, call getTexture( string path ) to retrieve it.
  *
  * That is all the steps.  Textures will be deleted at program end
  * (when the SFML_TextureManager singleton is deleted),
- * or they can be cleared with ClearAllTextures() or ClearTexture( string path )
+ * or they can be cleared with clearAllTextures() or clearTexture( string path )
  * if you want to cut down on memory usage.
  */
 
