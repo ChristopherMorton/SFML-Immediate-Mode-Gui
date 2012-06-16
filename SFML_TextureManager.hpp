@@ -29,7 +29,7 @@
  */
 
 #include <map>
-#include <list>
+#include <deque>
 #include <string>
 
 // Forward declarations
@@ -44,7 +44,7 @@ using namespace sf;
 class SFML_TextureManager
 {
     map<string, Texture*> texture_map;
-    list<string> path_list;
+    deque<string> path_list;
 
     SFML_TextureManager();
     ~SFML_TextureManager();

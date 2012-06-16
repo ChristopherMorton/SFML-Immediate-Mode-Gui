@@ -20,7 +20,7 @@ SFML_TextureManager& SFML_TextureManager::getSingleton()
 
 void SFML_TextureManager::addSearchDirectory( string dir )
 { 
-    path_list.push_back( dir );
+    path_list.push_front( dir );
 }
     
 void SFML_TextureManager::clearSearchDirectories()
@@ -33,7 +33,7 @@ bool SFML_TextureManager::addTexture( string path )
 {
     Texture* texture = new Texture();
     bool success = false;
-    for ( list<string>::iterator it = path_list.begin();
+    for ( deque<string>::iterator it = path_list.begin();
             it != path_list.end();
             ++it )
     {
