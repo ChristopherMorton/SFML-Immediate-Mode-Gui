@@ -79,7 +79,6 @@ private:
     bool windowLostFocus( );
     bool windowGainedFocus( );
 
-    sf::RenderWindow* m_RenderWindow;
     /*
     OIS::Mouse        *mMouse;
     OIS::Keyboard     *mKeyboard;

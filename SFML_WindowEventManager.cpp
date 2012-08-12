@@ -11,7 +11,7 @@
  
 #include <iostream>
 
-SFML_WindowEventManager::SFML_WindowEventManager( void ) : m_RenderWindow(NULL)
+SFML_WindowEventManager::SFML_WindowEventManager( void )
 { }
  
 SFML_WindowEventManager::~SFML_WindowEventManager( void ) {
@@ -54,19 +54,20 @@ SFML_WindowEventManager::~SFML_WindowEventManager( void ) {
 }
  
 void SFML_WindowEventManager::initialise( sf::RenderWindow* renderWindow ) {
-    GlobalRenderWindow::setWindow(renderWindow);
+    SFML_GlobalRenderWindow::set(renderWindow);
 }
 
 sf::RenderWindow* SFML_WindowEventManager::getRenderWindow() {
-    return GlobalRenderWindow::getWindow();
+    return SFML_GlobalRenderWindow::get();
 }
  
 bool SFML_WindowEventManager::handleEvents( void ) {
-    if (!m_RenderWindow)
+    sf::RenderWindow* r_window = getRenderWindow();
+    if (!r_window)
         return false;
 
     sf::Event event;
-    while ( m_RenderWindow->pollEvent(event) )
+    while ( r_window->pollEvent(event) )
     {
         switch (event.type) {
             case sf::Event::KeyPressed:
