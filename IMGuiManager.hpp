@@ -45,6 +45,7 @@
  * Date: September 15, 2011
  */
 
+// Why is this not included any more?
 //#include "SFML_Listeners.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

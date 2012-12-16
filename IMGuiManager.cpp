@@ -73,7 +73,7 @@ void IMGuiManager::begin()
     state.hot_widget = NULL;
     // Get mouse state from sf::Mouse
     state.mouse_down = sf::Mouse::isButtonPressed( sf::Mouse::Left );
-    state.mouse_pos = sf::Mouse::getPosition( (*(SFML_WindowEventManager::getSingleton().getRenderWindow())) );
+    state.mouse_pos = sf::Mouse::getPosition( *(SFML_WindowEventManager::getSingleton().getRenderWindow()));
 
     IMCursorManager::getSingleton().setCursor( IMCursorManager::DEFAULT );
 }
@@ -110,10 +110,7 @@ int IMGuiManager::runWidget( string name )
 
 int IMGuiManager::runWidget( unsigned int id )
 {
-    if ( !id || id >= widget_vector.size() )
-        return 0; // invalid id number
-
-    IMGuiWidget* widget = widget_vector[id];
+    IMGuiWidget* widget = getWidget( id );
     if (!widget)
         return 0; // no associated widget
 
@@ -138,7 +135,7 @@ IMGuiWidget* IMGuiManager::getWidget( string name )
 
 IMGuiWidget* IMGuiManager::getWidget( unsigned int id )
 {
-    if (id >= widget_vector.size())
+    if ( !id || id >= widget_vector.size())
         return NULL;
     else 
         return widget_vector[id];
