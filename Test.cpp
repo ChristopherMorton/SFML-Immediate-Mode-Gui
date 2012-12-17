@@ -19,20 +19,20 @@ int main()
 
     weManager.initialise( &app );
 
-    cManager.createCursor( IMCursorManager::DEFAULT, tManager.getTexture( "UglyBlueMouse.png" ));//, 30, 30 );
+    cManager.createCursor( IMCursorManager::DEFAULT, tManager.getTexture( "resources/UglyBlueMouse.png" ));//, 30, 30 );
 
     IMButton* myButton = new IMInstantButton();
-    myButton->setNormalTexture( tManager.getTexture( "Button.png" ) );
-    myButton->setHoverTexture( tManager.getTexture( "Button2.png" ) );
-    myButton->setPressedTexture( tManager.getTexture( "Button3.png" ) );
+    myButton->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
+    myButton->setHoverTexture( tManager.getTexture( "resources/Button2.png" ) );
+    myButton->setPressedTexture( tManager.getTexture( "resources/Button3.png" ) );
     myButton->setPosition( 10, 10 );
     myButton->setSize( 200, 200 );
     IMGuiManager::getSingleton().registerWidget( "Button", myButton );
 
     IMButton* myButton2 = new IMButton();
-    myButton2->setNormalTexture( tManager.getTexture( "Button.png" ) );
-    myButton2->setHoverTexture( tManager.getTexture( "Button2.png" ) );
-    myButton2->setPressedTexture( tManager.getTexture( "Button3.png" ) );
+    myButton2->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
+    myButton2->setHoverTexture( tManager.getTexture( "resources/Button2.png" ) );
+    myButton2->setPressedTexture( tManager.getTexture( "resources/Button3.png" ) );
     myButton2->setPosition( 100, 50 );
     myButton2->setSize( 300, 200 );
     IMGuiManager::getSingleton().registerWidget( "Button2", myButton2 );

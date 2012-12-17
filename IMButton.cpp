@@ -111,7 +111,7 @@ int IMButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
           mouse_pos.y >= y_pos + y_size)) { // Mouse is over button
 
         uistate.hot_widget = this;
-        if (uistate.active_widget == NULL && uistate.mouse_down)
+        if (uistate.active_widget == NULL && uistate.mouse_down) // Mouse clicked on button
             uistate.active_widget = this; 
     }
     // Render

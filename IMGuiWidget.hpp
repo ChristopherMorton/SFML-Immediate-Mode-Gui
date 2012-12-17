@@ -2,7 +2,7 @@
 #define IMGUI_WIDGET_HPP__
 
 /*
- * An IMGuiWidget is an object with one main function, Do(),
+ * An IMGuiWidget is an object with one main function, doWidget(),
  * which will check the ui state in IMGuiManager,
  * update it if appropriate, render the widget based on that state,
  * and then return 0 if inactive or 1+ if activated.

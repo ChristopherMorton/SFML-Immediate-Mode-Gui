@@ -5,15 +5,15 @@
 
 namespace sf { class RenderWindow; };
 
-struct GlobalRenderWindow
+struct SFML_GlobalRenderWindow
 {
-    static sf::RenderWindow*& getWindow() {
+    static sf::RenderWindow*& get() {
         static sf::RenderWindow* pointer;
         return pointer;
     }
 
-    static void setWindow( sf::RenderWindow* window) {
-        getWindow() = window;
+    static void set( sf::RenderWindow* window) {
+        get() = window;
     }
 };
 

@@ -62,11 +62,11 @@ void IMCursorManager::drawCursor()
     if (SYSTEM == current_type || (DEFAULT == current_type && NULL == m_cursor_images[DEFAULT]))
     {
         // Use system cursor
-        GlobalRenderWindow::getWindow()->setMouseCursorVisible(true);
+        SFML_GlobalRenderWindow::get()->setMouseCursorVisible(true);
     }
     else if ( ! (NONE == current_type || NULL == m_cursor_images[current_type]) )
     {
-        sf::RenderWindow* renderer = GlobalRenderWindow::getWindow();
+        sf::RenderWindow* renderer = SFML_GlobalRenderWindow::get();
         renderer->setMouseCursorVisible(false);
         // Draw!
         sf::Sprite* toDraw( m_cursor_images[current_type] );
