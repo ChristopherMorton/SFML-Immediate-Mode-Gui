@@ -16,7 +16,9 @@ public:
         NONE = 0, // Displays nothing
         SYSTEM, // If this is set as the cursor, sets m_window.ShowMouseCursor(true), (otherwise (false), obviously)
         DEFAULT, // This defaults to SYSTEM if it isn't available.  Also, IMGuiManager sets it to this in begin()
-        WAITING, // The rest default to NONE if not available (only happens if cursor is cleared)
+
+        // The rest default to NONE if not available (only happens if cursor is cleared)
+        WAITING,
         TARGET,
         LEFT_RIGHT_DRAG,
         UP_DOWN_DRAG,

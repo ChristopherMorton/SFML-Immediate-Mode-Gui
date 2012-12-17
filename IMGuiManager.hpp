@@ -34,19 +34,11 @@
  * BUT: You still need to call begin() and end() regardless.
  *
  *
- * IMPORTANT:
- * This class functions only in conjunction with SFML_WindowEventHandler.
- * It registers as a listener and renders to the same window that is
- * tied to SFML_WindowEventHandler's singleton.  You only have to register 
- * the RenderWindow through SFML_WindowEventHandler's initialise function.
- *
  *
  * Author: Christopher Morton
  * Date: September 15, 2011
  */
 
-// Why is this not included any more?
-//#include "SFML_Listeners.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
@@ -60,26 +52,24 @@ class IMGuiWidget;
 using namespace std;
 using namespace sf;
 
-class IMGuiManager // : public My_SFML_MouseListener
+class IMGuiManager 
 {
     map<string, unsigned int> id_map;
     vector<IMGuiWidget*> widget_vector;
     stack<sf::Sprite*> render_stack;
     unsigned int curr_id;
+    RenderWindow* r_window;
 
     IMGuiManager();
+    IMGuiManager(RenderWindow* r_window);
     // Note: on destruction, IMGuiManager will delete all mapped Widgets.
     ~IMGuiManager();
 public:
 
     static IMGuiManager& getSingleton();
 
-    /* MouseListener functions -- UNNEEDED
-    virtual bool mouseMoved( const Event::MouseMoveEvent &mouse_move );
-    virtual bool mouseButtonPressed( const Event::MouseButtonEvent &mouse_button_press );
-    virtual bool mouseButtonReleased( const Event::MouseButtonEvent &mouse_button_release );
-    virtual bool mouseWheelMoved( const Event::MouseWheelEvent &mouse_wheel_move );
-    */
+    void setRenderWindow(RenderWindow* r_window);
+    RenderWindow* getRenderWindow();
 
     void begin();
     void pushSprite( sf::Sprite* sprite );

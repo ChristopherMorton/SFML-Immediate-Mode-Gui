@@ -8,6 +8,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+#include <iostream>
+
 int main()
 {
     sf::RenderWindow app(sf::VideoMode(1000, 1000, 32), "SFML Window");//, sf::Style::Fullscreen); 
@@ -17,6 +19,7 @@ int main()
     SFML_TextureManager& tManager = SFML_TextureManager::getSingleton();
     SFML_WindowEventManager& weManager = SFML_WindowEventManager::getSingleton(); 
 
+    gManager.setRenderWindow( &app );
     weManager.initialise( &app );
 
     cManager.createCursor( IMCursorManager::DEFAULT, tManager.getTexture( "resources/UglyBlueMouse.png" ));//, 30, 30 );
@@ -36,8 +39,6 @@ int main()
     myButton2->setPosition( 100, 50 );
     myButton2->setSize( 300, 200 );
     IMGuiManager::getSingleton().registerWidget( "Button2", myButton2 );
-
-
 
     while (app.isOpen())
     {

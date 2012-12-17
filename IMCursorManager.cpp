@@ -1,5 +1,5 @@
 #include "IMCursorManager.hpp"
-#include "SFML_GlobalRenderWindow.hpp"
+#include "IMGuiManager.hpp"
 
 #include <iostream>
 
@@ -59,14 +59,17 @@ bool IMCursorManager::clearAllCursors()
 
 void IMCursorManager::drawCursor()
 {
+    RenderWindow* renderer = IMGuiManager::getSingleton().getRenderWindow();
+    if (NULL == renderer) return; // Can't draw on nothing!
+
     if (SYSTEM == current_type || (DEFAULT == current_type && NULL == m_cursor_images[DEFAULT]))
     {
         // Use system cursor
-        SFML_GlobalRenderWindow::get()->setMouseCursorVisible(true);
+        renderer->setMouseCursorVisible(true);
     }
     else if ( ! (NONE == current_type || NULL == m_cursor_images[current_type]) )
     {
-        sf::RenderWindow* renderer = SFML_GlobalRenderWindow::get();
+        // Use custom cursor image
         renderer->setMouseCursorVisible(false);
         // Draw!
         sf::Sprite* toDraw( m_cursor_images[current_type] );

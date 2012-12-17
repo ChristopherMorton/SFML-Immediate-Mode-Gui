@@ -103,7 +103,8 @@ int IMButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
 {
     IMGuiManager::UIState& uistate = IMGuiManager::getSingleton().state;
     sf::Vector2i& mouse_pos = uistate.mouse_pos;
-    //cout << "doWidget: mousex=" << mouse_pos.x << " mousey=" << mouse_pos.y << endl;
+
+    // cout << "x: " << mouse_pos.x << ", y:" << mouse_pos.y << ", m_down: " << uistate.mouse_down << ", Active:" << uistate.active_widget << ", Hot:" << uistate.hot_widget << std::endl;
     if (uistate.hot_widget == NULL &&
          !(mouse_pos.x < x_pos ||
           mouse_pos.y < y_pos ||

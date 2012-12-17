@@ -1,7 +1,6 @@
 #include "IMGuiManager.hpp"
 
 #include "IMGuiWidget.hpp"
-#include "SFML_WindowEventManager.hpp"
 #include "IMCursorManager.hpp"
 
 #include <iostream>
@@ -10,7 +9,18 @@ IMGuiManager::IMGuiManager() :
     id_map(),
     widget_vector(),
     render_stack(),
-    curr_id(0)
+    curr_id(0),
+    r_window(NULL)
+{
+    widget_vector.push_back( NULL ); // pre-padded with a null to block the 0 index for error passing
+}
+
+IMGuiManager::IMGuiManager(RenderWindow* renderer) :
+    id_map(),
+    widget_vector(),
+    render_stack(),
+    curr_id(0),
+    r_window(renderer)
 {
     widget_vector.push_back( NULL ); // pre-padded with a null to block the 0 index for error passing
 }
@@ -68,12 +78,26 @@ bool IMGuiManager::mouseWheelMoved( const Event::MouseWheelEvent &mouse_wheel_mo
 }
 *//////////////////////////////////////////////////////////////////////////
 
+void IMGuiManager::setRenderWindow(RenderWindow* renderer)
+{
+    r_window = renderer;
+}
+
+RenderWindow* IMGuiManager::getRenderWindow()
+{
+    return r_window;
+}
+
 void IMGuiManager::begin()
 {
+    if (NULL == r_window) return; // Can't do a GUI without a window, dummy
+
     state.hot_widget = NULL;
     // Get mouse state from sf::Mouse
     state.mouse_down = sf::Mouse::isButtonPressed( sf::Mouse::Left );
-    state.mouse_pos = sf::Mouse::getPosition( *(SFML_WindowEventManager::getSingleton().getRenderWindow()));
+    state.mouse_pos = sf::Mouse::getPosition( *r_window );
+
+    // std::cout << state.mouse_pos.x << ", " << state.mouse_pos.y << ": " << state.mouse_down << std::endl;
 
     IMCursorManager::getSingleton().setCursor( IMCursorManager::DEFAULT );
 }
@@ -86,13 +110,18 @@ void IMGuiManager::pushSprite( Sprite* sprite )
 
 void IMGuiManager::end()
 {
-    RenderWindow* renderer = SFML_WindowEventManager::getSingleton().getRenderWindow();
+    if (NULL == r_window) {
+        // Don't have a RenderWindow! 
+        render_stack.empty();
+        return; 
+    }
+
     // Draw the stuff!
     while (!render_stack.empty()) {
         Sprite* sprite = render_stack.top();
         render_stack.pop();
         if (sprite) {
-            renderer->draw( *sprite );
+            r_window->draw( *sprite );
             delete sprite;
         }
     }
