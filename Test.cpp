@@ -36,9 +36,12 @@ int main()
     myButton2->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
     myButton2->setHoverTexture( tManager.getTexture( "resources/Button2.png" ) );
     myButton2->setPressedTexture( tManager.getTexture( "resources/Button3.png" ) );
-    myButton2->setPosition( 100, 50 );
-    myButton2->setSize( 300, 200 );
+    myButton2->setPosition( 100, 100 );
+    myButton2->setSize( 300, 300 );
     IMGuiManager::getSingleton().registerWidget( "Button2", myButton2 );
+
+    bool part1 = true;
+    float move_x = 200, move_y = 50, dy = .2;
 
     while (app.isOpen())
     {
@@ -48,11 +51,16 @@ int main()
 
         gManager.begin();
 
-        if (myButton2->doWidget())
-            myButton2->setPosition( 300, 300 );
+        if (part1 && myButton2->doWidget())
+            part1 = false;
 
-        if (myButton->doWidget())
+        if (myButton->doMove(move_x, move_y, false))
             app.close(); 
+
+        if (move_y > 250) dy = -0.2;
+        if (move_y < 50) dy = 0.2;
+
+        move_y += dy;
 
         gManager.end();
 
