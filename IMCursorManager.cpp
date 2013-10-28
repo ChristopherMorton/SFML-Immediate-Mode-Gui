@@ -88,9 +88,14 @@ bool IMCursorManager::createCursor( const CursorType type, const sf::Texture* te
     if (type == NONE || type == SYSTEM)
         return false;
 
+    const sf::Vector2u t_size = texture->getSize();
+    
+    float scale_x = float(size_x) / t_size.x;
+    float scale_y = float(size_y) / t_size.y;
+
     sf::Sprite* cursorSprite = new sf::Sprite();
     cursorSprite->setPosition( offset_x, offset_y );
-    cursorSprite->setScale( size_x, size_y );
+    cursorSprite->setScale( scale_x, scale_y );
     cursorSprite->setTexture( *texture );
 
     loadSprite( type, cursorSprite );
