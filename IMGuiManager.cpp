@@ -1,7 +1,6 @@
 #include "IMGuiManager.hpp"
 
 #include "IMGuiWidget.hpp"
-#include "IMCursorManager.hpp"
 
 #include <iostream>
 
@@ -98,8 +97,6 @@ void IMGuiManager::begin()
     state.mouse_pos = sf::Mouse::getPosition( *r_window );
 
     // std::cout << state.mouse_pos.x << ", " << state.mouse_pos.y << ": " << state.mouse_down << std::endl;
-
-    IMCursorManager::getSingleton().setCursor( IMCursorManager::DEFAULT );
 }
 
 void IMGuiManager::pushSprite( Sprite* sprite )
