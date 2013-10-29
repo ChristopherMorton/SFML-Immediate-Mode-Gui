@@ -22,7 +22,7 @@ int main()
     gManager.setRenderWindow( &app );
     weManager.initialise( &app );
 
-    cManager.createCursor( IMCursorManager::DEFAULT, tManager.getTexture( "resources/UglyBlueMouse.png" ));//, 30, 30 );
+    cManager.createCursor( IMCursorManager::DEFAULT, tManager.getTexture( "resources/UglyBlueMouse.png" ), 0, 0, 64, 32 );
 
     IMButton* myButton = new IMInstantButton();
     myButton->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
