@@ -24,8 +24,10 @@ bool IMCursorManager::setCursor( const CursorType type )
 {
     if ( NULL == m_cursor_images[type] && type > DEFAULT )
         return false;
-    else
-        return m_cursor_images[type];
+    else {
+        current_type = type;
+        return true;
+    }
 }
 
 IMCursorManager::CursorType IMCursorManager::getCurrentCursor()
