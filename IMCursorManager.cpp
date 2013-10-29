@@ -75,7 +75,6 @@ void IMCursorManager::drawCursor()
         sf::Sprite* toDraw( m_cursor_images[current_type] );
         sf::Vector2i mouse_position = sf::Mouse::getPosition( *(renderer) );
         sf::Vector2f scale = toDraw->getScale();
-        std::cout << "Mouse: x=" << mouse_position.x << ", y=" << mouse_position.y << std::endl;
         toDraw->setOrigin( -mouse_position.x / scale.x, -mouse_position.y / scale.y);
         renderer->draw( *toDraw ); 
     }

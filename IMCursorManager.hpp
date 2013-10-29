@@ -18,6 +18,7 @@ public:
         DEFAULT, // This defaults to SYSTEM if it isn't available.  Also, IMGuiManager sets it to this in begin()
 
         // The rest default to NONE if not available (only happens if cursor is cleared)
+        CLICKING,
         WAITING,
         TARGET,
         LEFT_RIGHT_DRAG,
