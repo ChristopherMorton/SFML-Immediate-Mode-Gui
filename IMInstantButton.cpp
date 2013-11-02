@@ -29,7 +29,6 @@ int IMInstantButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
 {
     IMGuiManager::UIState& uistate = IMGuiManager::getSingleton().state;
     sf::Vector2i& mouse_pos = uistate.mouse_pos;
-    //cout << "DO: mousex=" << mouse_pos.x << " mousey=" << mouse_pos.y << endl;
     if (uistate.hot_widget == NULL &&
          !(mouse_pos.x < x_pos ||
           mouse_pos.y < y_pos ||

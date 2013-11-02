@@ -5,7 +5,7 @@ set(LIBRARY_NAME sfimgui)
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
 
-set (LIBRARY_FILES SFML_TextureManager.cpp SFML_WindowEventManager.cpp IMGuiManager.cpp IMCursorManager.cpp IMInstantButton.cpp IMButton.cpp)
+set (LIBRARY_FILES SFML_TextureManager.cpp SFML_WindowEventManager.cpp IMGuiManager.cpp IMCursorManager.cpp IMInstantButton.cpp IMButton.cpp IMImageButton.cpp)
 
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})

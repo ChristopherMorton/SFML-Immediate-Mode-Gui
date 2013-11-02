@@ -4,6 +4,7 @@
 #include "IMCursorManager.hpp"
 #include "IMButton.hpp"
 #include "IMInstantButton.hpp"
+#include "IMImageButton.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -40,6 +41,17 @@ int main()
     myButton2->setSize( 300, 300 );
     IMGuiManager::getSingleton().registerWidget( "Button2", myButton2 );
 
+    IMImageButton* myImageButton = new IMImageButton();
+    myImageButton->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
+    myImageButton->setHoverTexture( tManager.getTexture( "resources/Button2.png" ) );
+    myImageButton->setPressedTexture( tManager.getTexture( "resources/Button3.png" ) );
+    myImageButton->setImage( tManager.getTexture( "resources/Button2.png" ) );
+    myImageButton->setPosition( 500, 500 );
+    myImageButton->setSize( 100, 100 );
+    myImageButton->setImageOffset( 10, 20 );
+    myImageButton->setImageSize( 40, 20 );
+    IMGuiManager::getSingleton().registerWidget( "ImageButton", myImageButton );
+
     bool part1 = true;
     float move_x = 200, move_y = 50, dy = .2;
 
@@ -55,7 +67,10 @@ int main()
             part1 = false;
 
         if (myButton->doMove(move_x, move_y, false))
-            app.close(); 
+            app.close();
+
+        if (myImageButton->doWidget())
+            part1 = true;
 
         if (move_y > 250) dy = -0.2;
         if (move_y < 50) dy = 0.2;
