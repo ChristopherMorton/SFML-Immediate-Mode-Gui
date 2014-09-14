@@ -56,7 +56,7 @@ class IMGuiManager
 {
     map<string, unsigned int> id_map;
     vector<IMGuiWidget*> widget_vector;
-    stack<sf::Sprite*> render_stack;
+    stack<sf::Drawable*> render_stack;
     unsigned int curr_id;
     RenderWindow* r_window;
 
@@ -72,7 +72,7 @@ public:
     RenderWindow* getRenderWindow();
 
     void begin();
-    void pushSprite( sf::Sprite* sprite );
+    void pushSprite( sf::Drawable* sprite );
     void end();
     int runWidget( string name );
     int runWidget( unsigned int id_num );

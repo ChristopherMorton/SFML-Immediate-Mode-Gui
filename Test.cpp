@@ -5,6 +5,7 @@
 #include "IMButton.hpp"
 #include "IMInstantButton.hpp"
 #include "IMImageButton.hpp"
+#include "IMTextButton.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -52,6 +53,27 @@ int main()
     myImageButton->setImageSize( 40, 20 );
     IMGuiManager::getSingleton().registerWidget( "ImageButton", myImageButton );
 
+    sf::Font font;
+    if (!font.loadFromFile("/usr/share/fonts/TTF/LiberationMono-Regular.ttf"))
+        return EXIT_FAILURE;
+
+    std::string t = "Testing Testing 123";
+
+    IMTextButton* myTextButton = new IMTextButton();
+    myTextButton->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
+    myTextButton->setHoverTexture( tManager.getTexture( "resources/Button2.png" ) );
+    myTextButton->setPressedTexture( tManager.getTexture( "resources/Button3.png" ) );
+    myTextButton->setText( &t );
+    myTextButton->setFont( &font );
+    myTextButton->setPosition( 10, 10 );
+    myTextButton->setSize( 280, 70 );
+    myTextButton->setTextSize( 16 );
+    myTextButton->setTextColor( sf::Color::Black );
+    myTextButton->centerText();
+    IMGuiManager::getSingleton().registerWidget( "TextButton", myTextButton );
+
+
+
     bool part1 = true;
     float move_x = 200, move_y = 50, dy = .2;
 
@@ -71,6 +93,9 @@ int main()
 
         if (myImageButton->doWidget())
             part1 = true;
+
+        if (myTextButton->doWidget())
+           app.close();
 
         if (move_y > 250) dy = -0.2;
         if (move_y < 50) dy = 0.2;

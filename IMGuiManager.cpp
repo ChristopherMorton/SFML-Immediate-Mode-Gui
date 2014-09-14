@@ -99,7 +99,7 @@ void IMGuiManager::begin()
     // std::cout << state.mouse_pos.x << ", " << state.mouse_pos.y << ": " << state.mouse_down << std::endl;
 }
 
-void IMGuiManager::pushSprite( Sprite* sprite )
+void IMGuiManager::pushSprite( Drawable* sprite )
 {
     if (sprite)
         render_stack.push( sprite );
@@ -115,7 +115,7 @@ void IMGuiManager::end()
 
     // Draw the stuff!
     while (!render_stack.empty()) {
-        Sprite* sprite = render_stack.top();
+        Drawable* sprite = render_stack.top();
         render_stack.pop();
         if (sprite) {
             r_window->draw( *sprite );
