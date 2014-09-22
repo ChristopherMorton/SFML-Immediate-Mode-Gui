@@ -95,8 +95,6 @@ void IMGuiManager::begin()
     // Get mouse state from sf::Mouse
     state.mouse_down = sf::Mouse::isButtonPressed( sf::Mouse::Left );
     state.mouse_pos = sf::Mouse::getPosition( *r_window );
-
-    // std::cout << state.mouse_pos.x << ", " << state.mouse_pos.y << ": " << state.mouse_down << std::endl;
 }
 
 void IMGuiManager::pushSprite( Drawable* sprite )
@@ -121,6 +119,11 @@ void IMGuiManager::end()
             r_window->draw( *sprite );
             delete sprite;
         }
+    }
+
+    if (1 == state.mouse_down && NULL == state.active_widget) {
+       // Mouse was clicked NOT on a widget, so disallow activation of other widgets
+       state.active_widget = (IMGuiWidget*)-1;
     }
 
     if (NULL != state.active_widget && 0 == state.mouse_down) {
