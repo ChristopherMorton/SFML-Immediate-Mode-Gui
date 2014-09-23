@@ -167,3 +167,10 @@ void IMButton::setPressedTexture( Texture* texture )
 {
     pressed_look = texture;
 }
+
+void IMButton::setAllTextures( Texture* texture )
+{
+   normal_look = texture;
+   hover_look = texture;
+   pressed_look = texture;
+}

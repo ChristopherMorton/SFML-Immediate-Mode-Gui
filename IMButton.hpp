@@ -43,11 +43,7 @@ public:
     void setNormalTexture( Texture *texture );
     void setHoverTexture( Texture *texture );
     void setPressedTexture( Texture *texture );
-
-    /* Put this in IMTextButton
-    int setFont( Font& font );
-    int setText( std::string& text );
-    */
+    void setAllTextures( Texture *texture );
 };
 
 #endif
