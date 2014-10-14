@@ -6,6 +6,7 @@
 #include "IMInstantButton.hpp"
 #include "IMImageButton.hpp"
 #include "IMTextButton.hpp"
+#include "IMEdgeButton.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -72,6 +73,15 @@ int main()
     myTextButton->centerText();
     IMGuiManager::getSingleton().registerWidget( "TextButton", myTextButton );
 
+    IMEdgeButton* myEdgeButton = new IMEdgeButton();
+    myEdgeButton->setCornerAllTextures( tManager.getTexture( "resources/Button.png" ) );
+    myEdgeButton->setEdgeAllTextures( tManager.getTexture( "resources/Button2.png" ) );
+    myEdgeButton->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
+    myEdgeButton->setHoverTexture( tManager.getTexture( "resources/Button2.png" ) );
+    myEdgeButton->setPressedTexture( tManager.getTexture( "resources/Button3.png" ) );
+    myEdgeButton->setEdgeWidth( 10 );
+    myEdgeButton->setPosition( 600, 100 );
+    myEdgeButton->setSize( 100, 100 );
 
 
     bool part1 = true;
@@ -95,6 +105,9 @@ int main()
             part1 = true;
 
         if (myTextButton->doWidget())
+           app.close();
+
+        if (myEdgeButton->doWidget())
            app.close();
 
         if (move_y > 250) dy = -0.2;
