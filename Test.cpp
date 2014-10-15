@@ -7,6 +7,7 @@
 #include "IMImageButton.hpp"
 #include "IMTextButton.hpp"
 #include "IMEdgeButton.hpp"
+#include "IMEdgeTextButton.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -73,18 +74,21 @@ int main()
     myTextButton->centerText();
     IMGuiManager::getSingleton().registerWidget( "TextButton", myTextButton );
 
-    std::string t2 = "testing q's and p's";
+    std::string t2 = "\"Test q and p ||";
 
-    IMTextButton* myTextButton2 = new IMTextButton();
+    IMEdgeTextButton* myTextButton2 = new IMEdgeTextButton();
+    myTextButton2->setCornerAllTextures( tManager.getTexture( "resources/Button.png" ) );
+    myTextButton2->setEdgeAllTextures( tManager.getTexture( "resources/Button2.png" ) );
     myTextButton2->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
     myTextButton2->setHoverTexture( tManager.getTexture( "resources/Button2.png" ) );
     myTextButton2->setPressedTexture( tManager.getTexture( "resources/Button3.png" ) );
     myTextButton2->setText( &t2 );
     myTextButton2->setFont( &font );
     myTextButton2->setPosition( 300, 10 );
-    myTextButton2->setSize( 280, 70 );
+    myTextButton2->setSize( 280, 40 );
     myTextButton2->setTextSize( 16 );
     myTextButton2->setTextColor( sf::Color::Black );
+    myTextButton2->setEdgeWidth( 12 );
     myTextButton2->centerText();
     IMGuiManager::getSingleton().registerWidget( "TextButton", myTextButton2 );
 

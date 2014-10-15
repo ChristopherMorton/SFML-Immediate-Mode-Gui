@@ -63,7 +63,6 @@ void IMTextButton::draw( ButtonState state, int x_pos, int y_pos, int x_size, in
     IMGuiManager::getSingleton().pushSprite( button );
 }
 
-
 void IMTextButton::setFont( Font *font )
 {
     _font = font;
