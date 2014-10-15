@@ -73,6 +73,21 @@ int main()
     myTextButton->centerText();
     IMGuiManager::getSingleton().registerWidget( "TextButton", myTextButton );
 
+    std::string t2 = "testing q's and p's";
+
+    IMTextButton* myTextButton2 = new IMTextButton();
+    myTextButton2->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
+    myTextButton2->setHoverTexture( tManager.getTexture( "resources/Button2.png" ) );
+    myTextButton2->setPressedTexture( tManager.getTexture( "resources/Button3.png" ) );
+    myTextButton2->setText( &t2 );
+    myTextButton2->setFont( &font );
+    myTextButton2->setPosition( 300, 10 );
+    myTextButton2->setSize( 280, 70 );
+    myTextButton2->setTextSize( 16 );
+    myTextButton2->setTextColor( sf::Color::Black );
+    myTextButton2->centerText();
+    IMGuiManager::getSingleton().registerWidget( "TextButton", myTextButton2 );
+
     IMEdgeButton* myEdgeButton = new IMEdgeButton();
     myEdgeButton->setCornerAllTextures( tManager.getTexture( "resources/Button.png" ) );
     myEdgeButton->setEdgeAllTextures( tManager.getTexture( "resources/Button2.png" ) );
@@ -105,6 +120,9 @@ int main()
             part1 = true;
 
         if (myTextButton->doWidget())
+           app.close();
+
+        if (myTextButton2->doWidget())
            app.close();
 
         if (myEdgeButton->doWidget())

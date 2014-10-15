@@ -96,7 +96,8 @@ int IMTextButton::centerText()
         Text t( *_text, *_font, _char_size );
         FloatRect f = t.getLocalBounds();
         _x_text_offset = (_x_dimension - f.width) / 2;
-        _y_text_offset = (_y_dimension - f.height) / 2;
+
+        _y_text_offset = (_y_dimension - _char_size) / 2;
         return 0;
     } else
        return -1;
