@@ -26,8 +26,6 @@ public:
 
     virtual ~IMEdgeButton();
 
-    virtual int doButton( int x_pos, int y_pos, int x_size, int y_size );
-
 // New functionality
     void setCornerNormalTexture( Texture *texture );
     void setCornerHoverTexture( Texture *texture );
@@ -39,6 +37,8 @@ public:
     void setEdgeAllTextures( Texture *texture );
 
     void setEdgeWidth( int pixels );
+
+    virtual void draw( ButtonState state, int x_pos, int y_pos, int x_size, int y_size );
 
 protected:
     Texture *corner_normal_texture, *corner_hover_texture, *corner_pressed_texture;

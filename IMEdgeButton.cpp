@@ -96,9 +96,23 @@ void IMEdgeButton::setEdgeWidth( int pixels )
     edge_width = pixels;
 }
 
-void makeSprite( Texture *corner, Texture *edge, Texture *center, 
-      int x_pos, int y_pos, int x_size, int y_size, int edge_width )
+void IMEdgeButton::draw( ButtonState state, int x_pos, int y_pos, int x_size, int y_size )
 {
+    Texture *corner = NULL, *edge = NULL, *center = NULL;
+    if ( state == BUTTON_NORMAL) {
+       corner = corner_normal_texture;
+       edge = edge_normal_texture;
+       center = normal_look;
+    } else if ( state == BUTTON_HOVER ) {
+       corner = corner_hover_texture; 
+       edge = edge_hover_texture;
+       center = hover_look;
+    } else if ( state == BUTTON_PRESSED ) {
+       corner = corner_pressed_texture;
+       edge = edge_pressed_texture;
+       center = pressed_look;
+    }
+
     Sprite *c_nw, *c_ne, *c_se, *c_sw, *e_n, *e_e, *e_s, *e_w, *c;
     c_nw = new Sprite( *corner );
     c_ne = new Sprite( *corner );
@@ -166,50 +180,4 @@ void makeSprite( Texture *corner, Texture *edge, Texture *center,
     manager.pushSprite( e_s );
     manager.pushSprite( e_w );
     manager.pushSprite( c );
-}
-
-int IMEdgeButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
-{
-    IMGuiManager::UIState& uistate = IMGuiManager::getSingleton().state;
-    sf::Vector2i& mouse_pos = uistate.mouse_pos;
-
-    if (uistate.hot_widget == NULL &&
-         !(mouse_pos.x < x_pos ||
-          mouse_pos.y < y_pos ||
-          mouse_pos.x >= x_pos + x_size ||
-          mouse_pos.y >= y_pos + y_size)) { // Mouse is over button
-
-        uistate.hot_widget = this;
-        if (uistate.active_widget == NULL && uistate.mouse_down) // Mouse clicked on button
-            uistate.active_widget = this; 
-    }
-    // Render
-
-    if (uistate.active_widget == this)
-    {
-        // Pressed
-        makeSprite( corner_pressed_texture, edge_pressed_texture, pressed_look,
-              x_pos, y_pos, x_size, y_size, edge_width );
-    }
-    else
-    {
-        if (uistate.hot_widget == this)
-        {
-            // Hover
-            makeSprite( corner_hover_texture, edge_hover_texture, hover_look,
-                  x_pos, y_pos, x_size, y_size, edge_width );
-        }
-        else
-        {
-            // Normal
-            makeSprite( corner_normal_texture, edge_normal_texture, normal_look,
-                  x_pos, y_pos, x_size, y_size, edge_width );
-        }
-    }
-
-    if (uistate.mouse_down == 0 && uistate.hot_widget == this && uistate.active_widget == this)
-        return 1;
-    else
-        return 0;
-
 }

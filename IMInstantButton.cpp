@@ -37,7 +37,7 @@ int IMInstantButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
           mouse_pos.y >= y_pos + y_size)) { // Mouse is over button
 
         uistate.hot_widget = this;
-        if (uistate.active_widget == NULL && uistate.mouse_down)
+        if (uistate.active_widget == NULL && uistate.mouse_down) // Mouse clicked on button
             uistate.active_widget = this; 
     }
     // Render
@@ -45,31 +45,19 @@ int IMInstantButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
     if (uistate.active_widget == this)
     {
         // Pressed
-        Sprite *button = new Sprite( *pressed_look );
-        FloatRect frect = button->getGlobalBounds();
-        button->setPosition( x_pos, y_pos );
-        button->setScale( x_size / frect.width, y_size / frect.height );
-        IMGuiManager::getSingleton().pushSprite( button );
+        draw( BUTTON_PRESSED, x_pos, y_pos, x_size, y_size );
     }
     else
     {
         if (uistate.hot_widget == this)
         {
             // Hover
-            Sprite *button = new Sprite( *hover_look );
-            FloatRect frect = button->getGlobalBounds();
-            button->setPosition( x_pos, y_pos );
-            button->setScale( x_size / frect.width, y_size / frect.height );
-            IMGuiManager::getSingleton().pushSprite( button );
+            draw( BUTTON_HOVER, x_pos, y_pos, x_size, y_size );
         }
         else
         {
             // Normal
-            Sprite *button = new Sprite( *normal_look );
-            FloatRect frect = button->getGlobalBounds();
-            button->setPosition( x_pos, y_pos );
-            button->setScale( x_size / frect.width, y_size / frect.height );
-            IMGuiManager::getSingleton().pushSprite( button );
+            draw( BUTTON_NORMAL, x_pos, y_pos, x_size, y_size );
         }
     }
 

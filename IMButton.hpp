@@ -9,6 +9,12 @@ namespace sf {
 
 using namespace sf;
 
+enum ButtonState {
+   BUTTON_NORMAL,
+   BUTTON_HOVER,
+   BUTTON_PRESSED
+};
+
 class IMButton : public IMGuiWidget
 {
 protected:
@@ -39,6 +45,7 @@ public:
     virtual int setSize( int x_dim, int y_dim );
     ///////////////////////////////////////////////////////////////////////////
     virtual int doButton( int x_pos, int y_pos, int x_size, int y_size );
+    virtual void draw( ButtonState state, int x_pos, int y_pos, int x_size, int y_size );
 
     void setNormalTexture( Texture *texture );
     void setHoverTexture( Texture *texture );

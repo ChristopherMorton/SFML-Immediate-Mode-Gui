@@ -27,7 +27,7 @@ public:
 
     virtual ~IMTextButton();
 
-    virtual int doButton( int x_pos, int y_pos, int x_size, int y_size );
+    virtual void draw( ButtonState state, int x_pos, int y_pos, int x_size, int y_size );
 
 // New functionality
     void setFont( Font *font );

@@ -119,31 +119,19 @@ int IMButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
     if (uistate.active_widget == this)
     {
         // Pressed
-        Sprite *button = new Sprite( *pressed_look );
-        FloatRect frect = button->getGlobalBounds();
-        button->setPosition( x_pos, y_pos );
-        button->setScale( x_size / frect.width, y_size / frect.height );
-        IMGuiManager::getSingleton().pushSprite( button );
+        draw( BUTTON_PRESSED, x_pos, y_pos, x_size, y_size );
     }
     else
     {
         if (uistate.hot_widget == this)
         {
             // Hover
-            Sprite *button = new Sprite( *hover_look );
-            FloatRect frect = button->getGlobalBounds();
-            button->setPosition( x_pos, y_pos );
-            button->setScale( x_size / frect.width, y_size / frect.height );
-            IMGuiManager::getSingleton().pushSprite( button );
+            draw( BUTTON_HOVER, x_pos, y_pos, x_size, y_size );
         }
         else
         {
             // Normal
-            Sprite *button = new Sprite( *normal_look );
-            FloatRect frect = button->getGlobalBounds();
-            button->setPosition( x_pos, y_pos );
-            button->setScale( x_size / frect.width, y_size / frect.height );
-            IMGuiManager::getSingleton().pushSprite( button );
+            draw( BUTTON_NORMAL, x_pos, y_pos, x_size, y_size );
         }
     }
 
@@ -151,6 +139,20 @@ int IMButton::doButton( int x_pos, int y_pos, int x_size, int y_size )
         return 1;
     else
         return 0;
+}
+
+void IMButton::draw( ButtonState state, int x_pos, int y_pos, int x_size, int y_size )
+{
+    Texture *tex = NULL;
+    if (state == BUTTON_NORMAL) tex = normal_look;
+    if (state == BUTTON_HOVER) tex = hover_look;
+    if (state == BUTTON_PRESSED) tex = pressed_look;
+
+    Sprite *button = new Sprite( *tex );
+    FloatRect frect = button->getGlobalBounds();
+    button->setPosition( x_pos, y_pos );
+    button->setScale( x_size / frect.width, y_size / frect.height );
+    IMGuiManager::getSingleton().pushSprite( button );
 }
 
 void IMButton::setNormalTexture( Texture* texture ) 
