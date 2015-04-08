@@ -44,5 +44,8 @@ protected:
     Texture *corner_normal_texture, *corner_hover_texture, *corner_pressed_texture;
     Texture *edge_normal_texture, *edge_hover_texture, *edge_pressed_texture;
     int edge_width;
+    Sprite sp_corner_nw, sp_corner_ne, sp_corner_se, sp_corner_sw,
+           sp_edge_n, sp_edge_e, sp_edge_s, sp_edge_w,
+           sp_center;
 };
 #endif

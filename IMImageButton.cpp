@@ -43,10 +43,9 @@ IMImageButton::~IMImageButton()
 void IMImageButton::draw( ButtonState state, int x_pos, int y_pos, int x_size, int y_size )
 {
     if (image_texture) {
-        Sprite *image = new Sprite( *image_texture );
-        image->setPosition( x_pos + _x_image_offset , y_pos + _y_image_offset );
-        image->setScale( _x_image_scale, _y_image_scale );
-        IMGuiManager::getSingleton().pushSprite( image );
+        sp_image.setPosition( x_pos + _x_image_offset , y_pos + _y_image_offset );
+        sp_image.setScale( _x_image_scale, _y_image_scale );
+        IMGuiManager::getSingleton().pushSprite( &sp_image );
     }
 
     Texture *tex = NULL;
@@ -54,16 +53,19 @@ void IMImageButton::draw( ButtonState state, int x_pos, int y_pos, int x_size, i
     if (state == BUTTON_HOVER) tex = hover_look;
     if (state == BUTTON_PRESSED) tex = pressed_look;
 
-    Sprite *button = new Sprite( *tex );
-    FloatRect frect = button->getGlobalBounds();
-    button->setPosition( x_pos, y_pos );
-    button->setScale( x_size / frect.width, y_size / frect.height );
-    IMGuiManager::getSingleton().pushSprite( button );
+    if (!tex) return;
+
+    sp_button.setTexture( *tex );
+    Vector2u dim = tex->getSize();
+    sp_button.setPosition( x_pos, y_pos );
+    sp_button.setScale( x_size / (float)dim.x, y_size / (float)dim.y );
+    IMGuiManager::getSingleton().pushSprite( &sp_button );
 }
 
 void IMImageButton::setImage( Texture *texture )
 {
     image_texture = texture;
+    if (texture) sp_image.setTexture( *texture );
 }
 
 void IMImageButton::setImageOffset( int x_off, int y_off )

@@ -113,71 +113,72 @@ void IMEdgeButton::draw( ButtonState state, int x_pos, int y_pos, int x_size, in
        center = pressed_look;
     }
 
-    Sprite *c_nw, *c_ne, *c_se, *c_sw, *e_n, *e_e, *e_s, *e_w, *c;
-    c_nw = new Sprite( *corner );
-    c_ne = new Sprite( *corner );
-    c_se = new Sprite( *corner );
-    c_sw = new Sprite( *corner );
-    e_n = new Sprite( *edge );
-    e_e = new Sprite( *edge );
-    e_s = new Sprite( *edge );
-    e_w = new Sprite( *edge );
-    c = new Sprite( *center );
+    sp_corner_nw.setTexture( *corner );
+    sp_corner_ne.setTexture( *corner );
+    sp_corner_se.setTexture( *corner );
+    sp_corner_sw.setTexture( *corner );
+    sp_edge_n.setTexture( *edge );
+    sp_edge_e.setTexture( *edge );
+    sp_edge_s.setTexture( *edge );
+    sp_edge_w.setTexture( *edge );
+    sp_center.setTexture( *center );
 
     Vector2i center_dim( x_size - (2 * edge_width), y_size - (2 * edge_width) );
 
     // Scaling
-    FloatRect corner_scale = c_nw->getGlobalBounds();
-    corner_scale.width = edge_width / corner_scale.width;
-    corner_scale.height = edge_width / corner_scale.height;
-    c_nw->setScale( corner_scale.width, corner_scale.height );
-    c_ne->setScale( corner_scale.width, corner_scale.height );
-    c_se->setScale( corner_scale.width, corner_scale.height );
-    c_sw->setScale( corner_scale.width, corner_scale.height );
+    float scale_x, scale_y;
+    Vector2u scale_2u = corner->getSize();
+    scale_x = edge_width / (float)scale_2u.x;
+    scale_y = edge_width / (float)scale_2u.y;
+    sp_corner_nw.setScale( scale_x, scale_y );
+    sp_corner_ne.setScale( scale_x, scale_y );
+    sp_corner_se.setScale( scale_x, scale_y );
+    sp_corner_sw.setScale( scale_x, scale_y );
 
-    FloatRect edge_scale = e_n->getGlobalBounds();
-    edge_scale.height = edge_width / edge_scale.height;
-    e_n->setScale( center_dim.x / edge_scale.width, edge_scale.height );
-    e_s->setScale( center_dim.x / edge_scale.width, edge_scale.height );
-    e_e->setScale( center_dim.y / edge_scale.width, edge_scale.height );
-    e_w->setScale( center_dim.y / edge_scale.width, edge_scale.height );
+    scale_2u = edge->getSize();
+    scale_x = scale_2u.x;
+    scale_y = edge_width / (float)scale_2u.y;
+    sp_edge_n.setScale( center_dim.x / scale_x, scale_y );
+    sp_edge_s.setScale( center_dim.x / scale_x, scale_y );
+    sp_edge_e.setScale( center_dim.y / scale_x, scale_y );
+    sp_edge_w.setScale( center_dim.y / scale_x, scale_y );
 
-    FloatRect c_scale = c->getGlobalBounds();
-    c->setScale( center_dim.x / c_scale.width, center_dim.y / c_scale.height );
+    scale_2u = center->getSize();
+    sp_center.setScale( center_dim.x / (float)scale_2u.x, center_dim.y / (float)scale_2u.y );
 
     // Rotation
-    c_ne->setRotation( 90 );
-    c_se->setRotation( 180 );
-    c_sw->setRotation( 270 );
+    sp_corner_ne.setRotation( 90 );
+    sp_corner_se.setRotation( 180 );
+    sp_corner_sw.setRotation( 270 );
 
-    e_e->setRotation( 90 );
-    e_s->setRotation( 180 );
-    e_w->setRotation( 270 );
+    sp_edge_e.setRotation( 90 );
+    sp_edge_s.setRotation( 180 );
+    sp_edge_w.setRotation( 270 );
 
     // Positioning
-    c_nw->setPosition( x_pos, y_pos );
-    c_ne->setPosition( x_pos + x_size, y_pos );
-    c_se->setPosition( x_pos + x_size, y_pos + y_size );
-    c_sw->setPosition( x_pos, y_pos + y_size );
+    sp_corner_nw.setPosition( x_pos, y_pos );
+    sp_corner_ne.setPosition( x_pos + x_size, y_pos );
+    sp_corner_se.setPosition( x_pos + x_size, y_pos + y_size );
+    sp_corner_sw.setPosition( x_pos, y_pos + y_size );
 
-    e_n->setPosition( x_pos + edge_width, y_pos );
-    e_e->setPosition( x_pos + x_size, y_pos + edge_width );
-    e_s->setPosition( x_pos + x_size - edge_width, y_pos + y_size );
-    e_w->setPosition( x_pos, y_pos + y_size - edge_width );
+    sp_edge_n.setPosition( x_pos + edge_width, y_pos );
+    sp_edge_e.setPosition( x_pos + x_size, y_pos + edge_width );
+    sp_edge_s.setPosition( x_pos + x_size - edge_width, y_pos + y_size );
+    sp_edge_w.setPosition( x_pos, y_pos + y_size - edge_width );
 
-    c->setPosition( x_pos + edge_width, y_pos + edge_width );
+    sp_center.setPosition( x_pos + edge_width, y_pos + edge_width );
 
     // Draw
 
     IMGuiManager &manager = IMGuiManager::getSingleton();
 
-    manager.pushSprite( c_nw );
-    manager.pushSprite( c_ne );
-    manager.pushSprite( c_se );
-    manager.pushSprite( c_sw );
-    manager.pushSprite( e_n );
-    manager.pushSprite( e_e );
-    manager.pushSprite( e_s );
-    manager.pushSprite( e_w );
-    manager.pushSprite( c );
+    manager.pushSprite( &sp_corner_nw );
+    manager.pushSprite( &sp_corner_ne );
+    manager.pushSprite( &sp_corner_se );
+    manager.pushSprite( &sp_corner_sw );
+    manager.pushSprite( &sp_edge_n );
+    manager.pushSprite( &sp_edge_e );
+    manager.pushSprite( &sp_edge_s );
+    manager.pushSprite( &sp_edge_w );
+    manager.pushSprite( &sp_center );
 }

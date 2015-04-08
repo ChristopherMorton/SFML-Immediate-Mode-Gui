@@ -2,9 +2,11 @@
 #define IMGUI_BUTTON_HPP__
 
 #include "IMGuiWidget.hpp"
+#include <SFML/Graphics.hpp>
 
 namespace sf { 
-    class Texture; 
+    class Texture;
+    class Sprite;
 };
 
 using namespace sf;
@@ -19,6 +21,7 @@ class IMButton : public IMGuiWidget
 {
 protected:
     Texture *normal_look, *hover_look, *pressed_look;
+    Sprite sp_button;
 
 public:
     IMButton();

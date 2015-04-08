@@ -55,11 +55,12 @@ int main()
     myImageButton->setImageSize( 40, 20 );
     IMGuiManager::getSingleton().registerWidget( "ImageButton", myImageButton );
 
+    /*
     sf::Font font;
     if (!font.loadFromFile("/usr/share/fonts/TTF/LiberationMono-Regular.ttf"))
         return EXIT_FAILURE;
 
-    std::string t = "Testing Testing 123";
+    std::string t = "TEXT";
 
     IMTextButton* myTextButton = new IMTextButton();
     myTextButton->setNormalTexture( tManager.getTexture( "resources/Button.png" ) );
@@ -68,8 +69,8 @@ int main()
     myTextButton->setText( &t );
     myTextButton->setFont( &font );
     myTextButton->setPosition( 10, 10 );
-    myTextButton->setSize( 280, 70 );
-    myTextButton->setTextSize( 16 );
+    myTextButton->setSize( 280, 50 );
+    myTextButton->setTextSize( 50 );
     myTextButton->setTextColor( sf::Color::Black );
     myTextButton->centerText();
     IMGuiManager::getSingleton().registerWidget( "TextButton", myTextButton );
@@ -91,6 +92,7 @@ int main()
     myTextButton2->setEdgeWidth( 12 );
     myTextButton2->centerText();
     IMGuiManager::getSingleton().registerWidget( "TextButton", myTextButton2 );
+    */
 
     IMEdgeButton* myEdgeButton = new IMEdgeButton();
     myEdgeButton->setCornerAllTextures( tManager.getTexture( "resources/Button.png" ) );
@@ -123,11 +125,11 @@ int main()
         if (myImageButton->doWidget())
             part1 = true;
 
-        if (myTextButton->doWidget())
-           app.close();
+        //if (myTextButton->doWidget())
+           //app.close();
 
-        if (myTextButton2->doWidget())
-           app.close();
+        //if (myTextButton2->doWidget())
+           //app.close();
 
         if (myEdgeButton->doWidget())
            app.close();

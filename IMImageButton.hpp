@@ -35,6 +35,7 @@ protected:
     sf::Texture* image_texture;
     int _x_image_offset, _y_image_offset;
     float _x_image_scale, _y_image_scale;
+    Sprite sp_image;
 };
 #endif
 

@@ -148,11 +148,13 @@ void IMButton::draw( ButtonState state, int x_pos, int y_pos, int x_size, int y_
     if (state == BUTTON_HOVER) tex = hover_look;
     if (state == BUTTON_PRESSED) tex = pressed_look;
 
-    Sprite *button = new Sprite( *tex );
-    FloatRect frect = button->getGlobalBounds();
-    button->setPosition( x_pos, y_pos );
-    button->setScale( x_size / frect.width, y_size / frect.height );
-    IMGuiManager::getSingleton().pushSprite( button );
+    if (!tex) return;
+
+    sp_button.setTexture( *tex );
+    Vector2u dim = tex->getSize();
+    sp_button.setPosition( x_pos, y_pos );
+    sp_button.setScale( x_size / (float)dim.x, y_size / (float)dim.y );
+    IMGuiManager::getSingleton().pushSprite( &sp_button );
 }
 
 void IMButton::setNormalTexture( Texture* texture ) 

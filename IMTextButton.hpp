@@ -43,6 +43,7 @@ protected:
     sf::Color _color;
     int _x_text_offset, _y_text_offset;
     int _char_size;
+    sf::Text sftext;
 };
 #endif
 

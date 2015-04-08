@@ -97,10 +97,10 @@ void IMGuiManager::begin()
     state.mouse_pos = sf::Mouse::getPosition( *r_window );
 }
 
-void IMGuiManager::pushSprite( Drawable* sprite )
+void IMGuiManager::pushSprite( Drawable* sprite, bool delete_after )
 {
     if (sprite)
-        render_stack.push( sprite );
+        render_stack.push( pair<Drawable*,bool>(sprite, delete_after) );
 }
 
 void IMGuiManager::end()
@@ -113,11 +113,12 @@ void IMGuiManager::end()
 
     // Draw the stuff!
     while (!render_stack.empty()) {
-        Drawable* sprite = render_stack.top();
+        pair<Drawable*,bool> p = render_stack.top();
         render_stack.pop();
+        Drawable* sprite = p.first;
         if (sprite) {
             r_window->draw( *sprite );
-            delete sprite;
+            if (p.second) delete sprite;
         }
     }
 

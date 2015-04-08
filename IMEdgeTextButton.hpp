@@ -48,5 +48,9 @@ protected:
     sf::Color _color;
     int _x_text_offset, _y_text_offset;
     int _char_size;
+    Sprite sp_corner_nw, sp_corner_ne, sp_corner_se, sp_corner_sw,
+           sp_edge_n, sp_edge_e, sp_edge_s, sp_edge_w,
+           sp_center;
+    sf::Text sftext;
 };
 #endif

@@ -10,17 +10,9 @@
 
 class IMGuiWidget
 {
-protected:
+public:
     int _x_position, _y_position, _x_dimension, _y_dimension;
 
-    //IMGuiWidget( int x_pos, int y_pos, int x_dim, int y_dim )
-        //: _x_position(x_pos), _y_position(y_pos),
-          //_x_dimension(x_dim), _y_dimension(y_dim) {}
-    //IMGuiWidget( const IMGuiWidget& other )
-        //: _x_position(other._x_position), _y_position(other._y_position),
-          //_x_dimension(other._x_dimension), _y_dimension(other._y_dimension) {}
-
-public:
     virtual ~IMGuiWidget() {}
 
     virtual int doWidget() = 0;
@@ -32,8 +24,6 @@ public:
     // Resizes before Doing
     virtual int doResize( int x_size, int y_size, bool keep_new_size ) = 0;
 
-    //virtual int SetPosition( int x_pos, int y_pos ) { _x_position = x_pos; _y_position = y_pos; return 0; }
-    //virtual int SetSize( int x_dim, int y_dim ) { _x_dimension = x_dim; _y_dimension = y_dim; return 0; }
     virtual int setPosition( int x_pos, int y_pos ) = 0;
     virtual int setSize( int x_dim, int y_dim ) = 0;
 
